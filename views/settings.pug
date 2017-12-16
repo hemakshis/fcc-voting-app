@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .row
+    .col-md
+      .jumbotron(style='margin:5%;')
+        h2 Settings
+        form(method='POST', action='/users/settings')
+          .form-group
+            label Current Password
+            input.form-control(type='password', placeholder='Current Password', name='current')
+          .form-group
+            label New Password
+            input.form-control(type='password', placeholder='New Password', name='new')
+          .form-group
+            label Confirm New Password
+            input.form-control(type='password', placeholder='Confirm New Password', name='confirmnew')
+          button.btn.btn-primary(type='submit') Change Password

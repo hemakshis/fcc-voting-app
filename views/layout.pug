@@ -1,0 +1,80 @@
+doctype html
+html
+  head
+    title VoteM3
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css', integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet' href='/css/style.css')
+    script(language='JavaScript', type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(language='JavaScript', type='text/javascript', src='https://code.jquery.com/ui/1.9.2/jquery-ui.js')
+    script(language='JavaScript', type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js', integrity='sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh', crossorigin='anonymous')
+    script(language='JavaScript', type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js', integrity='sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ', crossorigin='anonymous')
+    script(language='JavaScript', type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js')
+    style.
+      input:focus, select:focus, textarea:focus, button:focus, .btn:focus, .btn:active {
+        outline: none !important;
+        box-shadow: none !important;
+        -webkit-appearance: none;
+        -webkit-box-shadow: none;
+      }  
+  body
+    nav.navbar.navbar-light.bg-light.navbar-expand-lg
+      button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarTogglerDemo03', aria-controls='navbarTogglerDemo03', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      a.navbar-brand(href='/') VoteM3
+      #navbarTogglerDemo03.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto.mt-2.mt-lg-0
+          if user
+            li.nav-item
+              a(href='/polls').nav-link
+                i.fa.fa-line-chart
+                |  Polls
+            li.nav-item
+              a(href='/polls/add', title='Create Poll').nav-link
+                i.fa.fa-plus
+          else
+            li.nav-item
+              a(href='/polls').nav-link
+                i.fa.fa-line-chart
+                |  Polls
+        if user
+          ul.navbar-nav.ml-auto
+            li.nav-item.dropdown
+              a#navbarDropdownMenuLink.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Hello, #{user.username} 
+              .dropdown-menu(aria-labelledby='navbarDropdownMenuLink')
+                a.dropdown-item(href='/polls/mypolls') My Polls
+                a.dropdown-item(href='/users/settings') Settings
+                a.dropdown-item(href='/users/logout') Logout
+        else
+          form.form-inline.my-2.my-lg-0(method='POST', action='/users/login')
+            .input-group.input-group-sm
+              span.input-group-addon
+                i.fa.fa-at
+              input.form-control.form-control-sm.mr-sm-2(type='text', placeholder='Username', name='username')
+            input.form-control.form-control-sm.mr-sm-2(type='password', placeholder='Password', name='password')
+            button.btn.btn-outline-info.my-2.my-sm-0.mr-sm-2(type='submit') 
+              i.fa.fa-sign-in
+              |  Login
+          button.btn.btn-info.my-2.my-sm-0(type='button', onClick="location.href='/users/signup'")
+            i.fa.fa-user-plus
+            |  Sign Up
+    .container
+      != messages('message', locals)
+      if errors
+        each error, i in errors
+          div(class='alert alert-danger') #{error.msg}
+    block content
+    br
+    br
+    footer.text-center &copy; Hemakshi Sachdev, 2017
+      ul.text-center
+        li(style='font-size:30px;display:inline-block;padding-right:3.5%;')
+          a(href='https://github.com/hemakshis')
+            i.fa.fa-github
+        li(style='font-size:30px;display:inline-block;padding-right:3.5%;')
+          a(href='https://www.freecodecamp.org/hemakshis')
+            i.fa.fa-free-code-camp
+        li(style='font-size:30px;display:inline-block;padding-right:3.5%;')
+          a(href='https://www.linkedin.com/in/hemakshi-sachdev-b41353103/')
+            i.fa.fa-linkedin   
+    

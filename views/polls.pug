@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  script(language='JavaScript', type='text/javascript', src='/js/displayPolls.js')
+  br
+  .container
+    .jumbotron.text-center
+      if user
+        h2 Add a new poll?
+      else
+        h2 Add your own poll?
+      br
+      if user
+        button.text-center.btn-lg.btn-primary(type='button', onclick="location.href='/polls/add'") 
+          i.fa.fa-plus
+          |  Create Poll 
+      else 
+        button.text-center.btn-lg.btn-primary(type='button', onclick="location.href='/users/login'") 
+          i.fa.fa-plus
+          |  Create Poll
+  .container
+      each pollSeg, i in polls
+        if (i % 3 == 0)
+          .card-deck
+            each poll, j in polls.slice(i, i + 3)
+              .card.text-white.mb-3
+                .card-body
+                  h3.card-title #{poll.title}
+                  h6.card-subtitle.mb-2.text-white - By #{poll.authorName}
+                .card-footer
+                  a.btn(href='/polls/' + poll._id) View Poll

@@ -1,0 +1,55 @@
+extends layout
+
+block content
+  style.
+      .carousel-img {
+        width: inherit;
+        height: 90vh;
+        max-height: 90vh;
+      }
+  #myCarousel.carousel.slide(data-ride='carousel')
+    ol.carousel-indicators
+      li.active(data-target='#myCarousel', data-slide-to='0')
+      li(data-target='#myCarousel', data-slide-to='1')
+      li(data-target='#myCarousel', data-slide-to='2')
+    .carousel-inner
+      .carousel-item.active
+        img.first-slide.carousel-img(src='https://i.pinimg.com/originals/7a/89/f3/7a89f39416b14fa997ccb09f6ca762c6.jpg', alt='First slide')
+        .container
+          .carousel-caption.text-left
+            h1 Get people's opinion
+            h5
+              | Create polls and know what the majority of the world thinks.
+            p
+              if user
+                a.btn.btn-lg.btn-primary(href='/polls/add', role='button')
+                  i.fa.fa-plus 
+                  |  Create Poll
+              else  
+                a.btn.btn-lg.btn-primary(href='/users/login', role='button')
+                  i.fa.fa-plus 
+                  |  Create Poll
+      .carousel-item
+        img.second-slide.carousel-img(src='https://clockwise.software/img/blog/angular-vs-react-vs-vue/header-background.png', alt='Second slide')
+        .container
+          .carousel-caption.text-dark
+            h1 Know what's trending
+            h5
+              | Check out all our polls and know what's trending.
+            p
+              a.btn.btn-lg.btn-primary(href='/polls', role='button')
+                i.fa.fa-line-chart
+                |  Polls
+      .carousel-item
+        img.third-slide.carousel-img(src='http://www.videonews24.it/wp-content/uploads/2014/09/Lionel-Messi-vs-Cristiano-Ronaldo-Top-30-Goals-Battle-HeilRJ-Teo-Cri.jpg', alt='Third slide')
+        .container
+          .carousel-caption.text-right.text-info
+            h1 Spread the word! 
+            h5
+              | Share polls among your friends, relatives and discuss.
+    a.carousel-control-prev(href='#myCarousel', role='button', data-slide='prev')
+      span.carousel-control-prev-icon(aria-hidden='true')
+      span.sr-only Previous
+    a.carousel-control-next(href='#myCarousel', role='button', data-slide='next')
+      span.carousel-control-next-icon(aria-hidden='true')
+      span.sr-only Next

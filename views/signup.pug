@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  script(language='JavaScript', type='text/javascript', src='/js/validateSignup.js')
+  br
+  .container
+    .jumbotron
+      br
+      hr
+      form(method='POST', action='/users/signup')
+        .form-group
+          label Name
+          .input-group
+            input#name.form-control(type='text', placeholder='Name', name='name')
+            span#name-span
+          small#small-name.form-text
+        .form-group
+          .form-row
+            .col
+              label E-mail
+              .input-group
+                input#email.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter E-mail', name='email') 
+                span#email-span
+              small#small-email.form-text We'll never share your email with anyone.
+            .col
+              label Username
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-at
+                input#username.form-control(type='text', placeholder='Username', name='username')
+                span#username-span
+              small#small-username.form-text
+        .form-group
+          label Password
+          .input-group
+            input#password.form-control(type='password', placeholder='Password', name='password')
+            span#password-group
+          small#small-password.form-text
+        .form-group
+          label Confirm Password
+          input#password2.form-control(type='password', placeholder='Confirm Password', name='password2')
+          small#small-password2.form-text
+        button#signup-btn.btn.btn-primary(type='submit') Sign Up
+      button#twitter-signup.btn(type='button', style='background-color:#1DA1F2;display:inline-block;vertical-align:top;', onClick="location.href='/users/auth/twitter'") Sign Up with 
+        i.fa.fa-twitter
+
+        

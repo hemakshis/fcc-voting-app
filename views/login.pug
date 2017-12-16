@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  br
+  .container
+    .jumbotron
+      br
+      hr
+      form(method='POST', action='/users/login')
+        .form-group  
+          label Username
+          .input-group
+            span.input-group-addon
+              i.fa.fa-at
+            input.form-control(type='text', placeholder='Username', name='username')
+        .form-group
+          label Password
+          input.form-control(type='password', placeholder='Password', name='password')
+        button.btn.btn-outline-info(type='submit') 
+          i.fa.fa-sign-in
+          |  Login
+      button#twitter-login.btn(type='button', style='background-color:#1DA1F2;display:inline-block;vertical-align:top;', onClick="location.href='/users/auth/twitter'") Login with 
+        i.fa.fa-twitter  
