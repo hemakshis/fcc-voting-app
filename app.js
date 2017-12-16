@@ -105,6 +105,6 @@ let polls = require('./routes/polls');
 app.use('/polls', polls);
 
 // Start Server
-app.listen(PORT, function(){
+app.listen(3000, function(){
   console.log('Server started on port 3000...');
 });

@@ -9,3 +9,7 @@
   background-color: #dff0d8;
   border-color: #d6e9c7;
 }
+
+button {
+  cursor: pointer;
+}
