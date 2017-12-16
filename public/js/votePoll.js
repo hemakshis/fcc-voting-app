@@ -89,10 +89,8 @@ $(document).ready(function(){
     var optionSelected = $("#select").find('option:selected').val();
     if (userID === null) {
       localStorage.setItem(pollID, 'true');
-      addVote(pollID, optionSelected);
-    } else {
-      addVote(pollID, optionSelected, userID);
     }
+    addVote(pollID, optionSelected, userID);
     // Update the chart
     var idx = myChart.data.labels.indexOf(optionSelected);
     var preVal = myChart.data.datasets[0].data[idx]

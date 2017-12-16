@@ -80,10 +80,12 @@ router.post('/vote/:id', function(req, res){
     if (err) throw err;
     else {
       // Add the User's ID into the 'votedUsersID' Array
-      Poll.findByIdAndUpdate(req.params.id, {'$push': {'votedUsersID': req.body.userID}}, function(err, doc){
-        if (err) throw err;
-        else res.send('success');
-      });
+      if (req.body.userID != null || req.body.userID != 'null') {
+        Poll.findByIdAndUpdate(req.params.id, {'$push': {'votedUsersID': req.body.userID}}, function(err, doc){
+          if (err) throw err;
+          else res.send('success');
+        });
+      }
     }
   });
 });

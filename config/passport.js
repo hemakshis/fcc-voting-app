@@ -7,8 +7,6 @@ const bcrypt = require('bcryptjs');
 
 require('dotenv').config();
 
-console.log('***********INSIDE PASSPORT*************', process.env);
-
 module.exports = function(passport){
   // Twitter Strategy
   passport.use(new TwitterStrategy({
