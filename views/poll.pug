@@ -13,7 +13,7 @@ block content
         h3.text-center Vote
         hr
         form(methon='POST', action='/polls/' + poll._id) 
-          select#select.form-control
+          select#select.form-control.custom-select
             option(selected='true', disabled='disabled') Choose an option
             each option, i in poll.options
               option #{option.obj}
