@@ -12,6 +12,8 @@ const expressValidator = require('express-validator');
 
 const PORT = process.env.PORT || 8080;
 
+//console.log(process.env);
+
 require('dotenv').config();
 
 mongoose.Promise = require('bluebird');
@@ -103,6 +105,6 @@ let polls = require('./routes/polls');
 app.use('/polls', polls);
 
 // Start Server
-app.listen(PORT, function(){
+app.listen(3000, function(){
   console.log('Server started on port 3000...');
 });

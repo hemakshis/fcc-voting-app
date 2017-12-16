@@ -4,9 +4,10 @@ const TwitterStrategy = require('passport-twitter').Strategy;
 const User = require('../models/user');
 const config = require('../config/database');
 const bcrypt = require('bcryptjs');
-const key = require('keys.js');
 
 require('dotenv').config();
+
+console.log('***********INSIDE PASSPORT*************', process.env);
 
 module.exports = function(passport){
   // Twitter Strategy
