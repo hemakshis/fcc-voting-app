@@ -85,7 +85,7 @@ router.post('/vote/:id', function(req, res){
           if (err) throw err;
           else res.send('success');
         });
-      }
+      } else res.send('success');
     }
   });
 });
