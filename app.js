@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const config = require('./config/database');
-const Chart = require('chart.js');
+const chart = require('chart.js');
 const expressValidator = require('express-validator');
 
 const PORT = process.env.PORT || 8080;

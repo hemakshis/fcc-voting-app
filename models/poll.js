@@ -15,7 +15,7 @@ const PollSchema = mongoose.Schema({
   },
   date:{
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
   options:[{obj: String, votes: Number}],
   votedUsersID: [String]
