@@ -1,6 +1,6 @@
 # A Voting App
 ##### Build under the FCC Curriculum. Add custom polls and get live result.
-##### [VoteM3] (https://votem3-hemakshis.herokuapp.com)
+##### [VoteM3](https://votem3-hemakshis.herokuapp.com)
 
 ### User Stories
 > 1. As an authenticated user, I can keep my polls and come back later to access them.
