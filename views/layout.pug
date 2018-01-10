@@ -3,7 +3,7 @@ html
   head
     meta(charset='utf-8')
     meta(http-equiv='x-ua-compatible', content='ie=edge')
-    meta(name='viewport', content='width=device-width, initial-scale=1, viewport-fit=cover')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
     title VoteM3
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css', integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb', crossorigin='anonymous')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -19,7 +19,15 @@ html
         box-shadow: none !important;
         -webkit-appearance: none;
         -webkit-box-shadow: none;
-      }  
+      }
+      footer ul li {
+        font-size: 24px;
+        display: inline-block;
+        padding-right: 3.5%;
+      }
+      .fa-code, .fa-heart {
+        -webkit-text-stroke: 1px;
+      }
   body
     nav.navbar.navbar-light.bg-light.navbar-expand-lg
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarTogglerDemo03', aria-controls='navbarTogglerDemo03', aria-expanded='false', aria-label='Toggle navigation')
@@ -70,17 +78,18 @@ html
     br
     br
     footer.text-center
-      i.fa.fa-code.text-dark
-      |  By Hemakshi Sachdev, 2017 with 
+      i.fa.fa-code.text-dark.fa-lg
+      |  with 
       i.fa.fa-heart.text-danger
+      |  By Hemakshi Sachdev, 2017
       ul.text-center
-        li(style='font-size:30px;display:inline-block;padding-right:3.5%;')
+        li
           a(href='https://github.com/hemakshis')
             i.fa.fa-github
-        li(style='font-size:30px;display:inline-block;padding-right:3.5%;')
+        li
           a(href='https://www.freecodecamp.org/hemakshis')
             i.fa.fa-free-code-camp
-        li(style='font-size:30px;display:inline-block;padding-right:3.5%;')
+        li
           a(href='https://www.linkedin.com/in/hemakshis')
             i.fa.fa-linkedin   
     

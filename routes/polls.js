@@ -46,7 +46,7 @@ router.post('/add', function(req, res){
     if (err) throw err;
     else{
       req.flash('success', 'Poll Created!!');
-      res.redirect('/polls');
+      res.redirect('/polls/' + newPoll._id);
     }
   });
 
@@ -73,6 +73,8 @@ router.get('/:id', function(req, res){
 
 // Vote!!
 router.post('/vote/:id', function(req, res){
+  console.log(req.body);
+
   // Look for the Poll Option with the given ID and given Option
   var conditions = {_id:req.params.id, 'options.obj':req.body.optionSelected}
   // Increment the count of number of votes on that particular Option
@@ -85,7 +87,29 @@ router.post('/vote/:id', function(req, res){
           if (err) throw err;
           else res.send('success');
         });
-      } else res.send('success');
+      } else {
+        res.send('success');
+      }
+    }
+  });
+});
+
+// Add the custom option
+router.post('/customvote/:id', function(req, res){
+  console.log(req.body);
+  // Update the options array of the poll by pushing
+  Poll.findByIdAndUpdate(req.params.id, {'$push': {'options': {'obj': req.body.optionSelected, 'votes': 1}}}, function(err, doc){
+    if (err) throw err;
+    else {
+      // Add the User's ID into the 'votedUsersID' Array
+      if (req.body.userID != null || req.body.userID != 'null') {
+        Poll.findByIdAndUpdate(req.params.id, {'$push': {'votedUsersID': req.body.userID}}, function(err, doc){
+          if (err) throw err;
+          else res.send('success');
+        });
+      } else {
+        res.send('success');
+      }
     }
   });
 });
