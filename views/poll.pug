@@ -3,6 +3,7 @@ extends layout
 block content
   script(language='JavaScript', type='text/javascript', src='/js/votePoll.js')
   script(language='JavaScript', type='text/javascript', src='/js/deletePoll.js')
+  script(language='JavaScript', type='text/javascript', src='/js/sharePoll.js')
   br
   .container
     h2.text-center #{poll.title}
@@ -19,8 +20,10 @@ block content
               option #{option.obj}
           br
           br#rembr
-          button#vote.btn.btn-primary(type='submit') VOTE!! 
+          button#vote.btn.btn-primary.mr-sm-2(type='submit') VOTE!! 
             i.fa.fa-arrow-up
+          button#share.btn.btn-success(type='button') Share it on 
+            i.fa.fa-twitter
         br
         if user
           button#addownoption.btn.btn-secondary(type='button') Add your own option 
