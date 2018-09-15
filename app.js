@@ -12,8 +12,6 @@ const expressValidator = require('express-validator');
 
 const PORT = process.env.PORT || 8080;
 
-//console.log(process.env);
-
 require('dotenv').config();
 
 mongoose.Promise = require('bluebird');

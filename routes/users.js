@@ -27,51 +27,51 @@ router.post('/validate', function(req, res){
 
   // Check for empty fields
   Object.keys(req.body).forEach(function(field){
-    if(!req.body[field]) {
-        response.push({field: field, type: "danger", message: "This field cannot be left empty."});
-    }
+	if(!req.body[field]) {
+		response.push({field: field, type: "danger", message: "This field cannot be left empty."});
+	}
   });
 
   // Basic Checks!
   if (!emailValid) {
-    response.push({field: "email", type: "danger", message: "Please enter a valid E-mail Address."});
+	response.push({field: "email", type: "danger", message: "Please enter a valid E-mail Address."});
   }
   if (password.length < 6) {
-    response.push({field: "password", type: "danger", message: "Password length too short!"});
+	response.push({field: "password", type: "danger", message: "Password length too short!"});
   }
   if (password != password2) {
-    response.push({field: "password2", type: "danger", message: "Passwords do not match."});
+	response.push({field: "password2", type: "danger", message: "Passwords do not match."});
   }
 
   // Check if username and email are unique or not.
   // Used nested .then() because of asynchronous nature of Promises
   const usernamePromise = new Promise((resolve, resject) =>{
-    User.findOne({username:username}, function(err, user){
-      if(err) reject(err);
-      if(Boolean(user)) resolve(true);
-      else resolve(false);
-    });
+	User.findOne({username:username}, function(err, user){
+	  if(err) reject(err);
+	  if(Boolean(user)) resolve(true);
+	  else resolve(false);
+	});
   }).then(function(usernameTaken){
-    // If the username field is not empty BUT the username is already in the DB
-    if (usernameTaken === true && username != '') {
-      response.push({field: "username", type: "danger", message: "Sorry! This username is already taken :("});
-    }
+	// If the username field is not empty BUT the username is already in the DB
+	if (usernameTaken === true && username != '') {
+		response.push({field: "username", type: "danger", message: "Sorry! This username is already taken :("});
+	}
 
-    // emailPromise nested inside the .then() part of usernamePromise (because of asynchronous nature of JS)
-    const emailPromise = new Promise((resolve, reject) => {
-      User.findOne({email:email}, function(err, user){
-        if(err) reject(err);
-        if(Boolean(user)) resolve(true);
-        else resolve(false);
-      });
-    }).then(function(emailTaken){
-      // If email is valid BUT already in the DB
-      if (emailTaken === true && emailValid) {
-        response.push({field: "email", type: "danger", message: "This E-mail address is already registered!"});
-      }
-      // Send the response
-      res.send(response);
-    });
+	// emailPromise nested inside the .then() part of usernamePromise (because of asynchronous nature of JS)
+	const emailPromise = new Promise((resolve, reject) => {
+	  User.findOne({email:email}, function(err, user){
+		if(err) reject(err);
+		if(Boolean(user)) resolve(true);
+		else resolve(false);
+	  });
+	}).then(function(emailTaken){
+	  // If email is valid BUT already in the DB
+	  if (emailTaken === true && emailValid) {
+		response.push({field: "email", type: "danger", message: "This E-mail address is already registered!"});
+	  }
+	  // Send the response
+	  res.send(response);
+	});
   });
 });
 
@@ -80,36 +80,36 @@ router.post('/signup', function(req, res) {
 
   // Create a user and store the details
   let newUser = new User({
-    name:req.body.name,
-    email:req.body.email,
-    username:req.body.username,
-    password:req.body.password,
-    providerID: 'local'
+	name:req.body.name,
+	email:req.body.email,
+	username:req.body.username,
+	password:req.body.password,
+	providerID: 'local'
   });
 
   // Generate the Salt
   bcrypt.genSalt(10, function(err, salt){
-    if(err){
-      console.log(err);
-      return;
-    }
-    // Create the hashed password
-    bcrypt.hash(newUser.password, salt, function(err, hash){
-      if(err){
-        console.log(err);
-      }
-      newUser.password = hash;
-      // Save the User
-      newUser.save(function(err){
-        if(err){
-          console.log(err);
-          return;
-        } else {
-          req.flash('success', 'You\'ve Signed Up successfully');
-          res.redirect('/users/login');
-        }
-      });
-    });
+	if(err){
+	  console.log(err);
+	  return;
+	}
+	// Create the hashed password
+	bcrypt.hash(newUser.password, salt, function(err, hash){
+	  if(err){
+		console.log(err);
+	  }
+	  newUser.password = hash;
+	  // Save the User
+	  newUser.save(function(err){
+		if(err){
+		  console.log(err);
+		  return;
+		} else {
+		  req.flash('success', 'You\'ve Signed Up successfully');
+		  res.redirect('/users/login');
+		}
+	  });
+	});
   });
 });
 
@@ -122,9 +122,9 @@ router.get('/login', function(req, res){
 router.post('/login', function(req, res, next){
   // Check the /models/passport.js file for Login method details
   passport.authenticate('local',{
-    successRedirect:'/',
-    failureRedirect:'/users/login',
-    failureFlash: true
+	successRedirect:'/',
+	failureRedirect:'/users/login',
+	failureFlash: true
   })(req, res, next);
 
 });
@@ -132,14 +132,14 @@ router.post('/login', function(req, res, next){
 // Twitter OAuth
 router.get('/auth/twitter',
   passport.authenticate('twitter', {
-    scope: ['profile']
+	scope: ['profile']
   }));
 
 router.get('/auth/twitter/callback',
   passport.authenticate('twitter', {
-    successRedirect: '/',
-    failureRedirect: '/users/login',
-    failureFlash: true
+	successRedirect: '/',
+	failureRedirect: '/users/login',
+	failureFlash: true
 }));
 
 // API to check if user is logged in or not
@@ -147,9 +147,9 @@ router.get('/auth/twitter/callback',
 router.get('/ifLoggedIn', function(req, res){
   console.log(req.user);
   if (req.user === undefined) {
-    res.json({});
+	res.json({});
   } else {
-    res.json({userID: req.user._id});
+	res.json({userID: req.user._id});
   }
 });
 
@@ -189,62 +189,62 @@ router.post('/settings', [
   const validationErrors = validationResult(req);
   let errors = [];
   if(!validationErrors.isEmpty()) {
-    Object.keys(validationErrors.mapped()).forEach(field => {
-      errors.push(validationErrors.mapped()[field]['msg']);
-    });
+	Object.keys(validationErrors.mapped()).forEach(field => {
+	  errors.push(validationErrors.mapped()[field]['msg']);
+	});
   }
 
   if(errors.length){
-    res.render('settings',{
-      errors:errors
-    });
+	res.render('settings',{
+	  errors:errors
+	});
   } else {
 
-    // Match Passwords
-    bcrypt.compare(current, req.user.password, function(err, isMatch){
-      if(err) throw err;
-      if(isMatch){
-        // Generate the Salt
-        bcrypt.genSalt(10, function(err, salt){
-          if(err){
-            console.log(err);
-            return;
-          }
-          // Create the hashed password
-          bcrypt.hash(req.body.new, salt, function(err, hash){
-            if(err){
-              console.log(err);
-            }
-            req.user.password = hash;
-            // Save the User
-            req.user.save(function(err){
-              if(err){
-                console.log(err);
-                return;
-              } else {
-                req.flash('success', 'Password Changed Successfully');
-                res.redirect('/');
-              }
-            });
-          });
-        });
-      } else {
-        errors.push('Current password is worng');
-        res.render('settings',{
-          errors:errors
-        });
-      }
-    });
+	// Match Passwords
+	bcrypt.compare(current, req.user.password, function(err, isMatch){
+	  if(err) throw err;
+	  if(isMatch){
+		// Generate the Salt
+		bcrypt.genSalt(10, function(err, salt){
+		  if(err){
+			console.log(err);
+			return;
+		  }
+		  // Create the hashed password
+		  bcrypt.hash(req.body.new, salt, function(err, hash){
+			if(err){
+			  console.log(err);
+			}
+			req.user.password = hash;
+			// Save the User
+			req.user.save(function(err){
+			  if(err){
+				console.log(err);
+				return;
+			  } else {
+				req.flash('success', 'Password Changed Successfully');
+				res.redirect('/');
+			  }
+			});
+		  });
+		});
+	  } else {
+		errors.push('Current password is worng');
+		res.render('settings',{
+		  errors:errors
+		});
+	  }
+	});
   }
 });
 
 // Access Control
 function ensureAuthenticated(req, res, next) {
   if(req.isAuthenticated()){
-    return next();
+	return next();
   } else {
-    req.flash('danger', 'Please Login');
-    res.redirect('/users/login');
+	req.flash('danger', 'Please Login');
+	res.redirect('/users/login');
   }
 }
 
